@@ -28,11 +28,13 @@ jobs:
           java-version: '17'
 
       - name: Install project dependencies
+        working-directory: ./client
         run: |
           npm install
           npm install @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6
 
       - name: Build web app
+        working-directory: ./client
         run: npm run build
 
       - name: Create Android project
@@ -54,3 +56,4 @@ jobs:
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 7
+          
