@@ -27,14 +27,12 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      # The app (index.html, src/, package.json) lives in the repo ROOT,
+      # not in ./client, so everything runs from the root.
       - name: Install project dependencies
-        working-directory: ./client
-        run: |
-          npm install
-          npm install @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6
+        run: npm install
 
       - name: Build web app
-        working-directory: ./client
         run: npm run build
 
       - name: Create Android project
@@ -56,4 +54,3 @@ jobs:
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 7
-          
